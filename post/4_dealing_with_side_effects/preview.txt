@@ -1,0 +1,2 @@
+- Code side effects are not welcome
+- What should we do to minimize them?

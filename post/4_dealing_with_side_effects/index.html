@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Dealing with side effects - Oleg Sinavski</title>
+  <meta name="description" content="How to stop touching unrelated">
+  <meta name="author" content="Oleg Sinavski"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Oleg Sinavski",
+    
+    "url": "https:\/\/sinavski.com"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/sinavski.com"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/sinavski.com",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/sinavski.com\/post\/4_dealing_with_side_effects\/",
+          "name": "Dealing with side effects"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Oleg Sinavski"
+  },
+  "headline": "Dealing with side effects",
+  "description" : "Side effects are not good Printing text in a terminal, communicating over the network, or controlling a robot are all examples of side effects. Now you know that side effects can cause problems and should be, in general, avoided (see the previous post). But if the software can’t affect the external world, it is pointless. Side effects are unavoidable but it\u0026rsquo;s possible to minimize their presence and minimize getting into certain pitfalls.",
+  "inLanguage" : "en",
+  "wordCount":  1331 ,
+  "datePublished" : "2016-03-08T00:00:00",
+  "dateModified" : "2016-03-08T00:00:00",
+  "image" : "https:\/\/sinavski.com\/img\/invader2.png",
+  "keywords" : [ "python, software design" ],
+  "mainEntityOfPage" : "https:\/\/sinavski.com\/post\/4_dealing_with_side_effects\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/sinavski.com",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/sinavski.com\/img\/invader2.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Dealing with side effects" />
+<meta property="og:description" content="How to stop touching unrelated">
+<meta property="og:image" content="https://sinavski.com/deal_with_side_effects.png" />
+<meta property="og:url" content="https://sinavski.com/post/4_dealing_with_side_effects/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Oleg Sinavski" />
+
+  <meta name="twitter:title" content="Dealing with side effects" />
+  <meta name="twitter:description" content="How to stop touching unrelated">
+  <meta name="twitter:image" content="https://sinavski.com/deal_with_side_effects.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://sinavski.com/img/invader_favicon.png' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.105.0">
+  <link rel="alternate" href="https://sinavski.com/index.xml" type="application/rss+xml" title="Oleg Sinavski"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://sinavski.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://sinavski.com/css/syntax.css" /><link rel="stylesheet" href="https://sinavski.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <style>
+.navbar-fixed-top{
+ 
+ 
+background-color:green;
+  height: 0px;
+  min-height: 0px;
+
+}
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+
+
+
+
+
+      <a class="navbar-brand" href="https://sinavski.com"></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+
+            
+            
+          <a title="Oleg Sinavski" href="https://sinavski.com">
+            <img class="avatar-img" src="/images/invader2_huc3ef4e4d0b9608f8925b26a85c47f26b_192102_100x100_fit_q75_h2_box_3.webp" alt="Oleg Sinavski" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+  
+  
+
+
+
+
+
+
+
+<header class="header-section has-img">
+  <a title="Oleg Sinavski" href="https://sinavski.com">
+
+  
+  
+    
+    <img src=https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp style="display: none"/>
+
+    <div class="intro-header big-img" style="background-image: url('https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp')">
+  
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>
+                
+                  Dealing with side effects
+                
+              </h1>
+                
+                  
+                    <h2 class="post-subheading">How to stop touching unrelated</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="img-desc" style="display: inline;"></span>
+    </div>
+
+  
+  <div class="intro-header no-img">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="post-heading">
+            
+              <h1>Dealing with side effects</h1>
+            
+            
+            
+              
+                <h2 class="post-subheading">How to stop touching unrelated</h2>
+              
+            
+            
+              <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  </a>
+
+</header>
+
+
+    
+<div class="index_main_holder">
+
+  <div class="post-content container" role="main" style="background-color: white">
+      <div class="inline-menu">
+    <a href="/"><i class="fa fa-home"></i>Home</a> |
+    <a href="/page/about">About Me</a> |
+
+    <div class="dropdown mt-5">
+
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+         Python <i class="fas fa-angle-down"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="/post/2_good_interface/">Good interfaces</a><a class="dropdown-item" href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a><a class="dropdown-item" href="/post/3_side_effects/">Side effects</a><a class="dropdown-item" href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></div>
+    </div>
+
+</div>
+
+          <div class="side-panel">
+
+    <hr class="small_left">
+    <a href="/"> <i class="fa fa-home"></i>Home</a>
+    <br>
+    <a href="/page/about">About Me</a>
+
+    <ul class="list-inline sidebar-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+        </ul>
+
+    <hr class="small_left">
+    <h4>Python/Software:</h4>
+
+    <ul>
+        
+        <li>
+            <a href="/post/2_good_interface/">Good interfaces</a>
+        </li><li>
+            <a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a>
+        </li><li>
+            <a href="/post/3_side_effects/">Side effects</a>
+        </li><li>
+            <a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a>
+        </li></ul>
+
+
+</div>
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <article role="main" class="blog-post">
+
+
+
+
+
+          <h2 id="side-effects-are-not-good">Side effects are not good</h2>
+<p>Printing text in a terminal, communicating over the network, or controlling a robot are all examples of side effects.
+Now you know that side effects can cause problems and should be, in general, avoided (<a href="/post/3_side_effects">see the previous post</a>).
+But if the software can’t affect the external world, it is pointless. Side effects are unavoidable
+but it&rsquo;s possible to minimize their presence and minimize getting into certain pitfalls.
+Haskell went so far as to isolate them on a language level.
+Unfortunately, many Python developers are not even aware that side-effect-free functions are beneficial.
+This post will review a few simple and standard recipes for dealing with side effects.</p>
+<h2 id="recipe-0---remove-a-side-effect-altogether">Recipe 0 - remove a side effect altogether</h2>
+<p>It is often the best option: is there a way to rewrite your software without accessing any external resources whatsoever?</p>
+<p>The simplest case is just to remove the old and unused print, logging, and warning statements.
+It is pretty common in a large codebase that people think their logging statements will be helpful for others:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;A message that I feel everyone would benefit from in my huge team.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+</span></span></code></pre></div><p>In reality, those logs are probably useful just for you and only this week.
+A good rule of thumb is to remove all prints and logs from your branch before merging to the mainline.
+Most likely, you wouldn’t notice the lack of a log message.
+There are a few cases where leaving logs is beneficial, but it should be a subject of a whole other post.</p>
+<p>Another typical case is initializing an external resource for no reason.
+E.g., you might have a set of scripts that rely on a specific folder structure.
+You crashed so many times on lacking the folder that you just put the following everywhere:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">algorithm_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&#34;folder_with_results&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">algorithm_2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&#34;folder_with_results&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+</span></span></code></pre></div><p>Yet another common case is forgetting to remove a side-effect after a refactoring.
+For example, you might have had this function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">large_function</span><span class="p">(</span><span class="n">argument</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="n">check_network_resource</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">argument</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">           <span class="n">result</span> <span class="o">*=</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">       <span class="c1"># checking that the network is still available after a long computation</span>
+</span></span><span class="line"><span class="cl">       <span class="k">assert</span> <span class="n">network_available</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">       <span class="n">send_to_address</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Error&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>that became this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">argument</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="n">result</span> <span class="o">*=</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">   <span class="k">assert</span> <span class="n">network_available</span><span class="p">()</span>  <span class="c1"># FORGOTTEN SIDE EFFECT</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">large_function</span><span class="p">(</span><span class="n">argument</span><span class="p">,</span> <span class="n">address</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="n">check_network_resource</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="n">send_to_address</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">factorial</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Error&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>You obviously shouldn’t check for network access in a math function.</p>
+<h2 id="recipe-1---move-a-side-effect-up-the-stack">Recipe 1 - move a side effect up the stack</h2>
+<p>Remember that calling a function that has side effects makes a caller function “dirty.”
+This means that the lower the side effect in the call stack, the more functions it infects.
+Hence it is always beneficial to move a side effect into the caller function.
+On average, you should lower the number of “dirty” functions in your codebase. Consider the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">send_tricky_thing</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">x</span> <span class="o">=</span> <span class="n">compute_one_thing</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">y</span> <span class="o">=</span> <span class="n">compute_something_else</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">send_by_network</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">send_to_person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">address</span> <span class="o">=</span> <span class="n">figure_out_address</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">send_tricky_thing</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">send_to_many</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">addresses</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">send_tricky_thing</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span>
+</span></span></code></pre></div><p>By lifting the side effect up the stack from <code>send_tricky_thing</code>, we should arrive to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">compute_tricky_thing</span><span class="p">(</span><span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">x</span> <span class="o">=</span> <span class="n">compute_one_thing</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">y</span> <span class="o">=</span> <span class="n">compute_something_else</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">send_to_person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">address</span> <span class="o">=</span> <span class="n">figure_out_address</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">send_by_network</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">compute_tricky_thing</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">send_to_many</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">argument</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">addresses</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">send_by_network</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">compute_tricky_thing</span><span class="p">(</span><span class="n">argument</span><span class="p">))</span>
+</span></span></code></pre></div><p>Notice that in this code, only two out of three functions are “dirty”. You just lowered the number of potential issues to deal with by a third!
+So now tests for <code>compute_tricky_thing</code> could be made very simple: you don’t need to mock the network.</p>
+<h2 id="recipe-2---short-circuit-a-side-effect">Recipe 2 - short-circuit a side effect</h2>
+<p>Often, something written with side effects by one developer gets reused by another developer, while the whole reason for a side effect is long gone.
+In the following code, we can see a widespread pattern of using the filesystem for passing stuff around:</p>
+<ul>
+<li>create a default config file</li>
+<li>modify the config file</li>
+<li>read out from a config file</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dump_default_config</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">default_config</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s1">&#39;learning_coeff&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">default_config</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_network</span><span class="p">(</span><span class="n">network_config_path</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">network_config_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">config</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">network</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">prediction</span> <span class="o">=</span> <span class="n">network</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">prediction</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">network_main</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config_path</span> <span class="o">=</span> <span class="s1">&#39;my_config.pkl&#39;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">dump_default_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># update the learning coefficient in the config file</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">config</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config</span><span class="p">[</span><span class="s1">&#39;learning_coeff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-4</span>  <span class="c1"># better learning coefficient</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">run_network</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</span></span></code></pre></div><p>Let’s use <em>recipe 1</em> and move side effects up the stack:
+first, move up saving of the default config, and second, move up loading the config for the network.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_default_config</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s1">&#39;learning_coeff&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_network</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">network</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">prediction</span> <span class="o">=</span> <span class="n">network</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">prediction</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">network_main</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config_path</span> <span class="o">=</span> <span class="s1">&#39;my_config.pkl&#39;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">default_config</span> <span class="o">=</span> <span class="n">create_default_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">default_config</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="c1"># update learning coefficient in the config file</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">config</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config</span><span class="p">[</span><span class="s1">&#39;learning_coeff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-4</span>  <span class="c1"># better learning coefficient</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">config</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">run_network</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now we can short-circuit all file system calls and arrive at neat and side-effect-free code.
+On top of being considerably smaller and simpler, it is also much faster:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_default_config</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s1">&#39;learning_coeff&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_network</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">network</span> <span class="o">=</span> <span class="n">create_network</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">prediction</span> <span class="o">=</span> <span class="n">network</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">prediction</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">network_main</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config</span> <span class="o">=</span> <span class="n">create_default_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config</span><span class="p">[</span><span class="s1">&#39;learning_coeff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-4</span>  <span class="c1"># better learning coefficient</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">run_network</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</span></span></code></pre></div><p>You might ask, what if I want a serialized config for some other purposes?
+Instead of having side effects everywhere in your codebase, just add it back, but only to the places you really need!
+For example, if you really want the dumped configs:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">network_main_with_config_dump</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config</span> <span class="o">=</span> <span class="n">create_default_config</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config</span><span class="p">[</span><span class="s1">&#39;learning_coeff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-4</span>  <span class="c1"># better learning coefficient</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># dump network config for debugging</span>
+</span></span><span class="line"><span class="cl">   <span class="n">config_path</span> <span class="o">=</span> <span class="s1">&#39;my_config.pkl&#39;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">run_network</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="recipe-3---expose-side-effects-to-developers">Recipe 3 - expose side effects to developers</h2>
+<p>Side effects could bring you problems, but <strong>hidden</strong> side effects are the worst.
+Imagine you use an external function to make a nice script for the user:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">external_library</span> <span class="kn">import</span> <span class="n">compute_optimal_solution</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">   <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&#34;Enter the number&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">coefficient</span> <span class="o">=</span> <span class="mf">4.</span>
+</span></span><span class="line"><span class="cl">   <span class="n">value</span> <span class="o">=</span> <span class="n">compute_optimal_solution</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Optimal value is :&#34;</span><span class="p">,</span> <span class="n">log</span><span class="p">(</span><span class="n">value</span><span class="o">*</span><span class="n">coefficient</span><span class="p">))</span>
+</span></span></code></pre></div><p>You deploy the script only to find out later from the users of various database-related crashes and network access from your script.
+Looking into the source of <code>compute_optimal_solution</code> you might find out something like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">compute_optimal_solution</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="n">result</span> <span class="o">+=</span> <span class="n">i</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="c1"># to understand how a user computes optimal solutions, we log the results in the debug database</span>
+</span></span><span class="line"><span class="cl">   <span class="n">database_cache</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DEFAULT_DB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">cursor</span> <span class="o">=</span> <span class="n">database_cache</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;INSERT INTO MyDB (argument, solution) VALUES (</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">database_cache</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">result</span>
+</span></span></code></pre></div><p>You would never guess from the name of the function <code>compute_optimal_solution</code> that it does something like that.
+It would be so much nicer if this function were called <code>compute_optimal_solution_and_cache_solution_in_database</code> right away!</p>
+<p>In that case, you would immediately see that this function is not what you want for your simple script, and you better use another function (or another library).
+It is a generic rule that the name of the function should describe what this function does.
+The same goes for side effects - if your function has a side effect, you better change its name.
+By the way, if you use this naming rule, you’ll find that the ugliest and most dangerous functions have the longest names!
+So it&rsquo;s a sign to refactor them.</p>
+<p>A similar strategy of exposing side effects is to split clean and dirty code on the file structure level.
+For example, a library-like folder should have only clean code, and all side effects should go into an application-like folder
+(e.g., <code>scripts</code>, <code>runners</code>, or something along those lines).</p>
+<h2 id="conclusion">Conclusion:</h2>
+<p>Remember, the majority of the time, if you see a side effect, you should deal with it right away using some recipes from this post:</p>
+<ul>
+<li>remove a side effect altogether</li>
+<li>move a side effect up the stack</li>
+<li>short-circuit a side effect</li>
+<li>expose side effects to developers</li>
+</ul>
+
+
+          
+            <div class="blog-tags">
+              
+                <a href="https://sinavski.com/tags/python/">python</a>&nbsp;
+              
+                <a href="https://sinavski.com/tags/software-design/">software design</a>&nbsp;
+              
+            </div>
+          
+
+          
+
+          
+            
+              
+            
+
+            
+                    <h4 class="see-also">See also</h4>
+                    <ul>
+                  
+                  
+                      <li><a href="/post/2_good_interface/">Good interfaces</a></li>
+                  
+                      <li><a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a></li>
+                  
+                      <li><a href="/post/3_side_effects/">Side effects</a></li>
+                  
+                </ul>
+
+            
+          
+        </article>
+
+        
+          <ul class="pager blog-pager">
+            
+            
+              <li class="next">
+                <a href="https://sinavski.com/post/3_side_effects/" data-toggle="tooltip" data-placement="top" title="Side effects">Next Post &rarr;</a>
+              </li>
+            
+          </ul>
+        
+
+
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            <a href="/">Oleg Sinavski
+              &nbsp;&bull;&nbsp;&copy;
+                2021
+            </a>
+
+          
+          &nbsp;&bull;&nbsp;
+          Powered by <a href="https://gohugo.io">Hugo</a>/<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://sinavski.com/js/main.js"></script><script> renderMathInElement(document.body); </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

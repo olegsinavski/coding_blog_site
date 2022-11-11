@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Oleg Sinavski</title>
+    <link>https://sinavski.com/tags/</link>
+    <description>Recent content in Tags on Oleg Sinavski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://sinavski.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python</title>
+      <link>https://sinavski.com/tags/python/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software design</title>
+      <link>https://sinavski.com/tags/software-design/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/tags/software-design/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

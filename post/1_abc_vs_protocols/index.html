@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Interfaces: abc vs Protocols - Oleg Sinavski</title>
+  <meta name="description" content="Should you use Protocols for interfaces?">
+  <meta name="author" content="Oleg Sinavski"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Oleg Sinavski",
+    
+    "url": "https:\/\/sinavski.com"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/sinavski.com"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/sinavski.com",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/sinavski.com\/post\/1_abc_vs_protocols\/",
+          "name": "Interfaces abc vs protocols"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Oleg Sinavski"
+  },
+  "headline": "Interfaces: abc vs Protocols",
+  "description" : "Python interfaces: what can you use? Python is somewhat different from other popular languages since there are no interfaces on the language level, however, there are several library implementations:\nabc typing.Protocols third-party implementations like Zope just custom implementations (e.g. via metaclasses) abc package is probably the most popular:\nfrom abc import ABC, abstractmethod class Animal(ABC): @abstractmethod def eat(self, food) -\u0026gt; float: pass @abstractmethod def sleep(self, hours) -\u0026gt; float: pass Next, there are several custom-made packages.",
+  "inLanguage" : "en",
+  "wordCount":  818 ,
+  "datePublished" : "2021-08-01T00:00:00",
+  "dateModified" : "2021-08-01T00:00:00",
+  "image" : "https:\/\/sinavski.com\/img\/invader2.png",
+  "keywords" : [ "python, software design" ],
+  "mainEntityOfPage" : "https:\/\/sinavski.com\/post\/1_abc_vs_protocols\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/sinavski.com",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/sinavski.com\/img\/invader2.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Interfaces: abc vs Protocols" />
+<meta property="og:description" content="Should you use Protocols for interfaces?">
+<meta property="og:image" content="https://sinavski.com/rsz_cube_pipes.png" />
+<meta property="og:url" content="https://sinavski.com/post/1_abc_vs_protocols/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Oleg Sinavski" />
+
+  <meta name="twitter:title" content="Interfaces: abc vs Protocols" />
+  <meta name="twitter:description" content="Should you use Protocols for interfaces?">
+  <meta name="twitter:image" content="https://sinavski.com/rsz_cube_pipes.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://sinavski.com/img/invader_favicon.png' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.105.0">
+  <link rel="alternate" href="https://sinavski.com/index.xml" type="application/rss+xml" title="Oleg Sinavski"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://sinavski.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://sinavski.com/css/syntax.css" /><link rel="stylesheet" href="https://sinavski.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <style>
+.navbar-fixed-top{
+ 
+ 
+background-color:green;
+  height: 0px;
+  min-height: 0px;
+
+}
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+
+
+
+
+
+      <a class="navbar-brand" href="https://sinavski.com"></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+
+            
+            
+          <a title="Oleg Sinavski" href="https://sinavski.com">
+            <img class="avatar-img" src="/images/invader2_huc3ef4e4d0b9608f8925b26a85c47f26b_192102_100x100_fit_q75_h2_box_3.webp" alt="Oleg Sinavski" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+  
+  
+
+
+
+
+
+
+
+<header class="header-section has-img">
+  <a title="Oleg Sinavski" href="https://sinavski.com">
+
+  
+  
+    
+    <img src=https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp style="display: none"/>
+
+    <div class="intro-header big-img" style="background-image: url('https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp')">
+  
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>
+                
+                  Interfaces: abc vs Protocols
+                
+              </h1>
+                
+                  
+                    <h2 class="post-subheading">Should you use Protocols for interfaces?</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="img-desc" style="display: inline;"></span>
+    </div>
+
+  
+  <div class="intro-header no-img">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="post-heading">
+            
+              <h1>Interfaces: abc vs Protocols</h1>
+            
+            
+            
+              
+                <h2 class="post-subheading">Should you use Protocols for interfaces?</h2>
+              
+            
+            
+              <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  </a>
+
+</header>
+
+
+    
+<div class="index_main_holder">
+
+  <div class="post-content container" role="main" style="background-color: white">
+      <div class="inline-menu">
+    <a href="/"><i class="fa fa-home"></i>Home</a> |
+    <a href="/page/about">About Me</a> |
+
+    <div class="dropdown mt-5">
+
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+         Python <i class="fas fa-angle-down"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="/post/2_good_interface/">Good interfaces</a><a class="dropdown-item" href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a><a class="dropdown-item" href="/post/3_side_effects/">Side effects</a><a class="dropdown-item" href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></div>
+    </div>
+
+</div>
+
+          <div class="side-panel">
+
+    <hr class="small_left">
+    <a href="/"> <i class="fa fa-home"></i>Home</a>
+    <br>
+    <a href="/page/about">About Me</a>
+
+    <ul class="list-inline sidebar-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+        </ul>
+
+    <hr class="small_left">
+    <h4>Python/Software:</h4>
+
+    <ul>
+        
+        <li>
+            <a href="/post/2_good_interface/">Good interfaces</a>
+        </li><li>
+            <a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a>
+        </li><li>
+            <a href="/post/3_side_effects/">Side effects</a>
+        </li><li>
+            <a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a>
+        </li></ul>
+
+
+</div>
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <article role="main" class="blog-post">
+
+
+
+
+
+          <h2 id="python-interfaces-what-can-you-use">Python interfaces: what can you use?</h2>
+<p>Python is somewhat different from other popular languages
+since there are no interfaces on the language level, however, there are several library implementations:</p>
+<ul>
+<li><code>abc</code></li>
+<li><code>typing.Protocols</code></li>
+<li>third-party implementations like <a href="https://zopeinterface.readthedocs.io/en/latest/README.html#declaring-interfaces">Zope</a></li>
+<li>just custom implementations (e.g. <a href="https://realpython.com/python-interface/">via metaclasses</a>)</li>
+</ul>
+<p><code>abc</code> package is probably the most popular:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="nd">@abstractmethod</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="nd">@abstractmethod</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span></code></pre></div><p>Next, there are several custom-made packages. The most frequently mentioned seems to be <a href="https://zopeinterface.readthedocs.io/en/latest/README.html#declaring-interfaces">Zope</a>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">zope.interface</span> <span class="kn">import</span> <span class="n">Interface</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="n">Interface</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span></code></pre></div><p>To be honest, I have no idea what is Zope at this point, except it is something web-related.
+From the examples I see, it seems like Zope interfaces have a lot of advanced features.
+Then there are more custom interface packages and tutorials on the web on how to make interface checkers yourself.</p>
+<p>Finally, there are protocols:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Protocol</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span></code></pre></div><p>A protocol is a formalization of Python&rsquo;s “duck-typing” ideology. There are many great articles on structural typing in Python.
+(<a href="https://trm.io/2017/01/29/structural-subtyping-python">1</a>, <a href="https://rednafi.github.io/reflections/structural-subtyping-in-python.html">2</a>
+and some <a href="https://news.ycombinator.com/item?id=26507161">discussion</a>) and maybe you shouldn’t even call Protocol an interface, but it
+does the job, and I had great success replacing abc with Protocols without any downsides.</p>
+<h2 id="what-should-you-use">What should you use?</h2>
+<p>One consideration is that the interface system will not be localized to a small part of your codebase.
+After you choose to go with it, you’ll see it everywhere, and it&rsquo;s going to be hard to change in the future.
+So I would immediately dismiss any custom implementation: it’s an extra dependency you have to deal with across the codebase:
+installation, versions, and so on.
+Additionally, a new developer in the team might not know this custom package, and you will have to constantly explain what it is and why you chose it.</p>
+<p>The main battle should happen between <code>abc</code> and <code>Protocols</code>.</p>
+<h3 id="static-checking-first">Static checking first</h3>
+<p>The big assumption I’m going to make is that you’re already convinced that static checking is a <em>must</em>:
+you are not going to run if the code fails <code>pylint/mypy</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">feed_animal</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">animal</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>pylint/mypy</code> support <code>abc</code> and <code>Protocols</code> equally well. But even if you disagree, both <code>abc</code> and <code>Protocols</code> allow for runtime checking as well.</p>
+<h3 id="both-support-explicit-syntax">Both support explicit syntax</h3>
+<p>First, note that you still can explicitly inherit from <code>abc</code> AND a <code>Protocol</code>. Many arguments in
+a <a href="https://www.youtube.com/watch?v=xvb5hGLoK0A">very good video&rsquo;s comments</a> from Arjan revolve around the misconception
+that you can’t explicitly do that with protocols:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Giraffe</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="o">...</span>
+</span></span></code></pre></div><p>So in that regard, <code>abc</code> and <code>protocols</code> could be used the same way.
+However, Protocols allow you an extra degree of design freedom where you can avoid explicit inheriting but still enjoy full interface checking:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Giraffe</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mf">0.</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mf">1.</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">giraffe</span> <span class="o">=</span> <span class="n">Giraffe</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">feed_animal</span><span class="p">(</span><span class="n">giraffe</span><span class="p">)</span>
+</span></span></code></pre></div><p>This allows you to make an interface for the code you don’t control and to loosen the dependencies between modules in your codebase.
+Whether you want it or not is a subtle choice on a case-by-case basis.</p>
+<p>One cool feature of protocols is that they allow defining an interface for a <em>function</em> (not only a class) - see <a href="https://mypy.readthedocs.io/en/stable/protocols.html#callback-protocols">callback protocols</a>.</p>
+<h3 id="both-support-default-methods-">Both support default methods :(</h3>
+<p>Now, unfortunately, there is a mishap that happened with<code> abc</code> and with <code>Protocols</code>.
+In the real world, with many people working on a codebase, abstract base classes sometimes tend to acquire a default method implementation.
+This is what it might look like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>  <span class="c1"># the same holds for Animal(ABC):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mf">3.</span>
+</span></span></code></pre></div><p>In that case, they stop to be “abstract” and become just a base class, and Python doesn’t allow you to catch that.
+Design with inheritance is not really the same as design with interfaces and
+I would love Python to separate them on a language level, but it is unlikely to happen.
+Protocols have an advantage here since it&rsquo;s possible to avoid inheritance altogether: this will not get you into the inheritance mess.</p>
+<h3 id="protocols-are-shorter">Protocols are shorter</h3>
+<p>Last but not least, you can count the number of lines of code you need to write to define an interface.
+With <code>abc</code>, you must have an <code>abstractmethod</code> decorator for every method.
+But with Protocols, just add an extra decorator per class if you want runtime checking.
+So here, Protocols win hands down.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Let’s add up the scores:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Capability</th>
+<th style="text-align:center">ABC</th>
+<th style="text-align:center">Protocols</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Runtime checking</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Static checking</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Explicit interface with inheritance</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Implicit interface without inheritance</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Ability to have default method implementation</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">-1</td>
+</tr>
+<tr>
+<td style="text-align:left">Callback interface</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:left">Number of lines</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">Total</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"><strong>4</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Hopefully, I’m not missing anything huge in this analysis.
+But looking at the results, team Protocols wins, so you probably should just switch to it!</p>
+
+
+          
+            <div class="blog-tags">
+              
+                <a href="https://sinavski.com/tags/python/">python</a>&nbsp;
+              
+                <a href="https://sinavski.com/tags/software-design/">software design</a>&nbsp;
+              
+            </div>
+          
+
+          
+
+          
+            
+              
+            
+
+            
+                    <h4 class="see-also">See also</h4>
+                    <ul>
+                  
+                  
+                      <li><a href="/post/2_good_interface/">Good interfaces</a></li>
+                  
+                      <li><a href="/post/3_side_effects/">Side effects</a></li>
+                  
+                      <li><a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></li>
+                  
+                </ul>
+
+            
+          
+        </article>
+
+        
+          <ul class="pager blog-pager">
+            
+              <li class="previous">
+                <a href="https://sinavski.com/post/3_side_effects/" data-toggle="tooltip" data-placement="top" title="Side effects">&larr; Previous Post</a>
+              </li>
+            
+            
+              <li class="next">
+                <a href="https://sinavski.com/post/2_good_interface/" data-toggle="tooltip" data-placement="top" title="Good interfaces">Next Post &rarr;</a>
+              </li>
+            
+          </ul>
+        
+
+
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            <a href="/">Oleg Sinavski
+              &nbsp;&bull;&nbsp;&copy;
+                2021
+            </a>
+
+          
+          &nbsp;&bull;&nbsp;
+          Powered by <a href="https://gohugo.io">Hugo</a>/<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://sinavski.com/js/main.js"></script><script> renderMathInElement(document.body); </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

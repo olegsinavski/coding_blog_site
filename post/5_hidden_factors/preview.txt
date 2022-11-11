@@ -1,0 +1,2 @@
+- Some function are influenced by unexpected factors
+- What are downsides of hidden factors?

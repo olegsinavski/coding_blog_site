@@ -1,0 +1,2 @@
+- Code side effects affect external world
+- Why is it bad? What are the pitfalls?

@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Good interfaces - Oleg Sinavski</title>
+  <meta name="description" content="How to make interfaces concise">
+  <meta name="author" content="Oleg Sinavski"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Oleg Sinavski",
+    
+    "url": "https:\/\/sinavski.com"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/sinavski.com"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/sinavski.com",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/sinavski.com\/post\/2_good_interface\/",
+          "name": "Good interfaces"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Oleg Sinavski"
+  },
+  "headline": "Good interfaces",
+  "description" : "Introduction An \u0026ldquo;interface\u0026rdquo; is a nebulous concept that might be initially hard to grasp. It is a blueprint of interactions with an object and its behaviors (reading Wikipedia is not going to hurt).\nDo you need interfaces in Python at all? There are several good posts about it:\nChelsea Troy Stack Overflow (please read several answers!) Diego Barba Here I’m going to assume that you read that all and decided to go with interfaces!",
+  "inLanguage" : "en",
+  "wordCount":  1406 ,
+  "datePublished" : "2021-08-01T00:00:00",
+  "dateModified" : "2021-08-01T00:00:00",
+  "image" : "https:\/\/sinavski.com\/img\/invader2.png",
+  "keywords" : [ "python, software design" ],
+  "mainEntityOfPage" : "https:\/\/sinavski.com\/post\/2_good_interface\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/sinavski.com",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/sinavski.com\/img\/invader2.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Good interfaces" />
+<meta property="og:description" content="How to make interfaces concise">
+<meta property="og:image" content="https://sinavski.com/rsz_happy_python_person.png" />
+<meta property="og:url" content="https://sinavski.com/post/2_good_interface/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Oleg Sinavski" />
+
+  <meta name="twitter:title" content="Good interfaces" />
+  <meta name="twitter:description" content="How to make interfaces concise">
+  <meta name="twitter:image" content="https://sinavski.com/rsz_happy_python_person.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://sinavski.com/img/invader_favicon.png' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.105.0">
+  <link rel="alternate" href="https://sinavski.com/index.xml" type="application/rss+xml" title="Oleg Sinavski"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://sinavski.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://sinavski.com/css/syntax.css" /><link rel="stylesheet" href="https://sinavski.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <style>
+.navbar-fixed-top{
+ 
+ 
+background-color:green;
+  height: 0px;
+  min-height: 0px;
+
+}
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+
+
+
+
+
+      <a class="navbar-brand" href="https://sinavski.com"></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+
+            
+            
+          <a title="Oleg Sinavski" href="https://sinavski.com">
+            <img class="avatar-img" src="/images/invader2_huc3ef4e4d0b9608f8925b26a85c47f26b_192102_100x100_fit_q75_h2_box_3.webp" alt="Oleg Sinavski" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+  
+  
+
+
+
+
+
+
+
+<header class="header-section has-img">
+  <a title="Oleg Sinavski" href="https://sinavski.com">
+
+  
+  
+    
+    <img src=https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp style="display: none"/>
+
+    <div class="intro-header big-img" style="background-image: url('https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp')">
+  
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>
+                
+                  Good interfaces
+                
+              </h1>
+                
+                  
+                    <h2 class="post-subheading">How to make interfaces concise</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="img-desc" style="display: inline;"></span>
+    </div>
+
+  
+  <div class="intro-header no-img">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="post-heading">
+            
+              <h1>Good interfaces</h1>
+            
+            
+            
+              
+                <h2 class="post-subheading">How to make interfaces concise</h2>
+              
+            
+            
+              <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  </a>
+
+</header>
+
+
+    
+<div class="index_main_holder">
+
+  <div class="post-content container" role="main" style="background-color: white">
+      <div class="inline-menu">
+    <a href="/"><i class="fa fa-home"></i>Home</a> |
+    <a href="/page/about">About Me</a> |
+
+    <div class="dropdown mt-5">
+
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+         Python <i class="fas fa-angle-down"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="/post/2_good_interface/">Good interfaces</a><a class="dropdown-item" href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a><a class="dropdown-item" href="/post/3_side_effects/">Side effects</a><a class="dropdown-item" href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></div>
+    </div>
+
+</div>
+
+          <div class="side-panel">
+
+    <hr class="small_left">
+    <a href="/"> <i class="fa fa-home"></i>Home</a>
+    <br>
+    <a href="/page/about">About Me</a>
+
+    <ul class="list-inline sidebar-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+        </ul>
+
+    <hr class="small_left">
+    <h4>Python/Software:</h4>
+
+    <ul>
+        
+        <li>
+            <a href="/post/2_good_interface/">Good interfaces</a>
+        </li><li>
+            <a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a>
+        </li><li>
+            <a href="/post/3_side_effects/">Side effects</a>
+        </li><li>
+            <a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a>
+        </li></ul>
+
+
+</div>
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <article role="main" class="blog-post">
+
+
+
+
+
+          <h2 id="introduction">Introduction</h2>
+<p>An &ldquo;interface&rdquo; is a nebulous concept that might be initially hard to grasp.
+It is a blueprint of interactions with an object and its behaviors
+(reading <a href="https://en.wikipedia.org/wiki/Interface_(computing)">Wikipedia</a> is not going to hurt).</p>
+<p>Do you need interfaces in Python at all? There are several good posts about it:</p>
+<ul>
+<li><a href="https://chelseatroy.com/2020/11/14/why-use-or-not-use-interfaces-in-python/">Chelsea Troy</a></li>
+<li><a href="https://stackoverflow.com/questions/2124190/how-do-i-implement-interfaces-in-python">Stack Overflow</a> <em>(please read several answers!)</em></li>
+<li><a href="https://towardsdatascience.com/python-interfaces-why-should-a-data-scientist-care-2ed7ff80f225">Diego Barba</a></li>
+</ul>
+<p>Here I’m going to assume that you read that all and decided to go with interfaces!
+Next, you have read <a href="/post/1_abc_vs_protocols/">my post about Protocols</a> and got convinced that <code>Protocols</code> is the way
+to implement interfaces in Python. So this is what we are going to use here.</p>
+<p>But what is a <strong>good</strong> interface?</p>
+<h2 id="an-interface-has-to-be-small">An interface has to be small</h2>
+<p>You’re designing a Zoo simulator. Look at this interface for &ldquo;an animal&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">go_to_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">look_for_food</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">hunger_level</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">is_asleep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">is_awake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_position</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_orientation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RotationMatrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_transform3d</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HomogeneousMatrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span></code></pre></div><p>You should be alarmed when you see an interface with more than 4-5 methods.
+Chances are that it is not a well-designed interface; moreover, you should expect to find the project it is used in overly convoluted.</p>
+<p>You might think: “Clearly, animals do tons of different things, so it&rsquo;s justified to have many methods.”
+But if the thing you’re modeling is so complicated, would you ever expect to be done with it?
+You can probably think of 10 more methods to add to a “generic animal.”</p>
+<p>What are the typical signs to look for that will help to reduce the interface&rsquo;s size?</p>
+<h2 id="semantic-duplication">Semantic duplication</h2>
+<p>While there could be some obvious duplication methods (e.g., <code>get_weights</code> vs. <code>current_weight</code>),
+more commonly, you will find a semantic duplication:
+methods that somewhat overlap in the functionality such that its possible to kill some of them:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_position</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_orientation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">RotationMatrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_transform3d</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HomogeneousMatrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span></code></pre></div><p>You can get position and orientation from the current_transform3d method,
+so position and orientation getters should be gone.
+However, it is possible that position and orientation methods are so convenient
+and used everywhere that it could be better to remove <code>current_transform3d</code>
+and have a utility that makes a homogeneous matrix from the position and orientation.</p>
+<p>A similar situation is probably happening with:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">is_asleep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">is_awake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span></code></pre></div><p>Is it the case that <code>animal.is_asleep() == not animal.is_awake()</code>? If yes, then you better remove one of them.</p>
+<h2 id="decoupling-interfaces">Decoupling interfaces</h2>
+<p>After removing duplicates, the next issue to look for is unnecessary combinations of interfaces.
+Most likely, you don’t use all Animal features in every function.
+Most likely, there are different quite decoupled pieces of your software:</p>
+<ol>
+<li>there is a function that handles drawing animals</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">draw_animal</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">context</span> <span class="o">=</span> <span class="n">make_drawing_context</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">transform</span> <span class="o">=</span> <span class="n">animal</span><span class="o">.</span><span class="n">current_transform3d</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">project</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">transform</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">animal</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">context</span>
+</span></span></code></pre></div><ol start="2">
+<li>there is an animal life cycle algorithm and there is an algorithm that handles optimal navigation:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">life_management</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="n">animal</span><span class="o">.</span><span class="n">hunger_level</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="n">animal</span><span class="o">.</span><span class="n">is_awake</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">       <span class="n">food_position</span> <span class="o">=</span> <span class="n">animal</span><span class="o">.</span><span class="n">look_for_food</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">       <span class="n">a_star_navigation</span><span class="p">(</span><span class="n">animal</span><span class="p">,</span> <span class="n">food_position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">       <span class="bp">self</span><span class="o">.</span><span class="n">eat</span><span class="p">(</span><span class="n">get_food</span><span class="p">(</span><span class="n">food_position</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="n">animal</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
+</span></span></code></pre></div><ol start="3">
+<li>there is a zoo management system</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">purchase_decision</span><span class="p">(</span><span class="n">animal</span><span class="p">:</span> <span class="n">Animal</span><span class="p">,</span> <span class="n">budget</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">transportation_cost</span> <span class="o">=</span> <span class="n">animal</span><span class="o">.</span><span class="n">current_weight</span><span class="p">()</span> <span class="o">*</span> <span class="n">transport_price_kg</span>
+</span></span><span class="line"><span class="cl">   <span class="n">expenses</span> <span class="o">=</span> <span class="n">animal</span><span class="o">.</span><span class="n">price</span><span class="p">()</span> <span class="o">+</span> <span class="n">transportation_cost</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">expenses</span> <span class="o">&lt;</span> <span class="n">budget</span><span class="o">*</span><span class="mf">0.5</span>  <span class="c1"># don&#39;t buy if not much money left</span>
+</span></span></code></pre></div><p>Those points suggest that a “generic animal” interface is actually a collection of quite different interfaces
+that all can be moved into different modules:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">VisualEntity</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_transform3d</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HomogeneousMatrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MovingEntity</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">go_to_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ZooAsset</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">current_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BehavingAgent</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">look_for_food</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">hunger_level</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">is_awake</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span></code></pre></div><p>What are the advantages of many small interfaces over a single big one?
+First, it allows you to decouple parts of your system:
+e.g., a rendering team will not depend on a navigation algorithm developer.
+It enables you to avoid implementing unnecessary methods for “Animals” that are edge cases
+or reuse interfaces that have nothing to do with the original “generic animal.”
+E.g., you might find that  <code>draw_animal</code> and <code>purchase_decision</code> functions actually work for your “Plants.”</p>
+<h2 id="recursive-semantics">Recursive semantics</h2>
+<p>Another red flag in an interface is when one function has to call another
+in the same interface. Continuing with the Zoo example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BehavingAnimal</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">lifecycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; What happens during 24 hours interval &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; What happens when the animal consumes food &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; What happens when the animal sleeps &#34;&#34;&#34;</span>
+</span></span></code></pre></div><p>It is unlikely that an animal will spend the day without eating and sleeping.
+But, even if you skip it, you have to do it eventually.
+So “eat” and “sleep” are going to be called from the “lifecycle” implementation for all animals.
+When you see an interface like this, you can be pretty sure that it came from extracting an interface from a class hierarchy.
+For example, all animals shared a lifecycle in a base class, and you could override eating/sleeping,
+but then a weird animal appeared with its own lifecycle.
+So you would typically see most classes implementing the “lifecycle” function in a standard way.</p>
+<p>This interface couples together two levels of abstraction.
+There are two interfaces in one, similar to the example above.
+A “lifecycle” part is used in some global context, and “eat/sleep” is probably used only locally.
+I would definitely be inclined to break them into two:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ElementaryAnimal</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; What happens when the animal consumes food &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; What happens when the animal sleeps &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LifecycleManagement</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">lifecycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">animal</span><span class="p">:</span> <span class="n">ElementaryAnimal</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; What happens during 24 hours interval &#34;&#34;&#34;</span>
+</span></span></code></pre></div><p>This clearly states that a lifecycle depends on the animal that can eat and sleep.</p>
+<h2 id="too-generic">Too generic</h2>
+<p>Yet another red-ish flag is over-generic interfaces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Creature</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">act</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="s2">&#34;&#34;&#34; Do anything you want&#34;&#34;&#34;</span>
+</span></span></code></pre></div><p>An interface is like a contract between two parties.
+A contract that says “do whatever” is as good as no contract at all.
+It is too easy to make such interfaces in an optional/dynamic-type language like Python, especially with its wildcard argument features.</p>
+<p>Unfortunately, such interfaces have to appear in some situations, but we can summarize it as “passing around a black box.”
+If you have a choice, passing “blackboxes” is worse than explicit things.
+But if you have to, it’s better to explicitly acknowledge its blackness by passing
+a functor and moving to a more functional style that would generalize to other functions.</p>
+<h2 id="constructors-and-factories">Constructors and factories?</h2>
+<p>Ok, so let’s move on to probably a more controversial interface red flag: factories.
+Have you noticed that <code>__init__</code> is typically <strong>not</strong> a part of any interface?
+Why not? It seems like it is just a method you can have. It goes back to C++, where constructors are not virtual.
+Bjarne Stroustrup <a href="https://www.stroustrup.com/bs_faq2.html#virtual-ctor">gives an answer</a> why it is so:</p>
+<p><em>“A virtual call is a mechanism to get work done given partial information.
+To create an object you need complete information. Consequently, a &ldquo;call to a constructor&rdquo; cannot be virtual.”</em></p>
+<p>However, I usually go for another, more high-level reason: constructor is an interface for making an object;
+it belongs to the “object-makers” realm.
+It just can’t belong to an already-made object: you can’t make an object twice.
+In other words, a constructor and an object interface are yet another example of two different levels of abstraction.</p>
+<p>A sausage maker has a method to create sausages, a sausage itself can’t create more sausages.
+A constructor <code>Sausage.__init__</code> can be viewed as a method like <code>SausageMaker.make_sausage</code>,
+where the <code>Sausage</code> class itself is an interface provider.<br>
+Similar ideas can be found in the following <a href="https://stackoverflow.com/a/5367884">answer</a> about Zope interfaces:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Sausage</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">price</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">pass</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SausageMachine</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="k">def</span> <span class="nf">make_sausage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sausage</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="o">...</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">make_two_sausages</span><span class="p">(</span><span class="n">sausage_maker_function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Sausage</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">   <span class="n">one</span> <span class="o">=</span> <span class="n">sausage_maker_function</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">two</span> <span class="o">=</span> <span class="n">sausage_maker_function</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">make_two_sausages</span><span class="p">(</span><span class="n">SausageMachine</span><span class="p">()</span><span class="o">.</span><span class="n">make_sausage</span><span class="p">)</span>  <span class="c1"># this works</span>
+</span></span><span class="line"><span class="cl"><span class="n">make_two_sausages</span><span class="p">(</span><span class="n">Sausage</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>  <span class="c1"># this works as well</span>
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>To summarize, a <strong>good</strong> interface better:</p>
+<ul>
+<li>be small and concise</li>
+<li>avoid semantic duplication</li>
+<li>avoid coupling several parts in one</li>
+<li>avoid mixing multiple abstraction levels</li>
+<li>be specific and not too generic</li>
+<li>not include <code>__init__</code></li>
+</ul>
+<p>At the same time, real life has many exceptions to those rules of thumb.
+But those must be justified exceptions, not excuses to keep messy interfaces around.</p>
+
+
+          
+            <div class="blog-tags">
+              
+                <a href="https://sinavski.com/tags/python/">python</a>&nbsp;
+              
+                <a href="https://sinavski.com/tags/software-design/">software design</a>&nbsp;
+              
+            </div>
+          
+
+          
+
+          
+            
+              
+            
+
+            
+                    <h4 class="see-also">See also</h4>
+                    <ul>
+                  
+                  
+                      <li><a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a></li>
+                  
+                      <li><a href="/post/3_side_effects/">Side effects</a></li>
+                  
+                      <li><a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></li>
+                  
+                </ul>
+
+            
+          
+        </article>
+
+        
+          <ul class="pager blog-pager">
+            
+              <li class="previous">
+                <a href="https://sinavski.com/post/1_abc_vs_protocols/" data-toggle="tooltip" data-placement="top" title="Interfaces: abc vs Protocols">&larr; Previous Post</a>
+              </li>
+            
+            
+          </ul>
+        
+
+
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            <a href="/">Oleg Sinavski
+              &nbsp;&bull;&nbsp;&copy;
+                2021
+            </a>
+
+          
+          &nbsp;&bull;&nbsp;
+          Powered by <a href="https://gohugo.io">Hugo</a>/<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://sinavski.com/js/main.js"></script><script> renderMathInElement(document.body); </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Oleg Sinavski</title>
+    <link>https://sinavski.com/tags/python/</link>
+    <description>Recent content in python on Oleg Sinavski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://sinavski.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Good interfaces</title>
+      <link>https://sinavski.com/post/2_good_interface/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/post/2_good_interface/</guid>
+      <description>Introduction An &amp;ldquo;interface&amp;rdquo; is a nebulous concept that might be initially hard to grasp. It is a blueprint of interactions with an object and its behaviors (reading Wikipedia is not going to hurt).
+Do you need interfaces in Python at all? There are several good posts about it:
+Chelsea Troy Stack Overflow (please read several answers!) Diego Barba Here I’m going to assume that you read that all and decided to go with interfaces!</description>
+    </item>
+    
+    <item>
+      <title>Interfaces: abc vs Protocols</title>
+      <link>https://sinavski.com/post/1_abc_vs_protocols/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/post/1_abc_vs_protocols/</guid>
+      <description>Python interfaces: what can you use? Python is somewhat different from other popular languages since there are no interfaces on the language level, however, there are several library implementations:
+abc typing.Protocols third-party implementations like Zope just custom implementations (e.g. via metaclasses) abc package is probably the most popular:
+from abc import ABC, abstractmethod class Animal(ABC): @abstractmethod def eat(self, food) -&amp;gt; float: pass @abstractmethod def sleep(self, hours) -&amp;gt; float: pass Next, there are several custom-made packages.</description>
+    </item>
+    
+    <item>
+      <title>Side effects</title>
+      <link>https://sinavski.com/post/3_side_effects/</link>
+      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/post/3_side_effects/</guid>
+      <description>What is a side effect? What is a side effect? Let’s take a simple function that computes the absolute value of a number:
+def abs_value_0(x): if x &amp;lt; 0: return -x return x and then use it in this fake console application:
+if __name__ == &amp;#39;__main__&amp;#39;: number = int(input(&amp;#34;enter a number:&amp;#34;)) print(&amp;#34;Thinking...&amp;#34;) time.sleep(10.) result = abs_value_0(number) print(&amp;#34;Absolute value is&amp;#34;, result) When a user runs that script, she is going to experience a simple text interface that just prints out the abs of an entered number.</description>
+    </item>
+    
+    <item>
+      <title>Dealing with side effects</title>
+      <link>https://sinavski.com/post/4_dealing_with_side_effects/</link>
+      <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/post/4_dealing_with_side_effects/</guid>
+      <description>Side effects are not good Printing text in a terminal, communicating over the network, or controlling a robot are all examples of side effects. Now you know that side effects can cause problems and should be, in general, avoided (see the previous post). But if the software can’t affect the external world, it is pointless. Side effects are unavoidable but it&amp;rsquo;s possible to minimize their presence and minimize getting into certain pitfalls.</description>
+    </item>
+    
+  </channel>
+</rss>

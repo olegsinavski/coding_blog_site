@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Oleg Sinavski</title>
+    <link>https://sinavski.com/page/</link>
+    <description>Recent content in Pages on Oleg Sinavski</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://sinavski.com/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About me</title>
+      <link>https://sinavski.com/page/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sinavski.com/page/about/</guid>
+      <description>Hello, thats me:
+Some dream that robots are going to be helping us around.
+I&amp;rsquo;m an experienced researcher, developer and manager working in autonomous navigation trying to make it a reality.
+RL and Self-driving Currently, I&amp;rsquo;m a Principal Applied Scientist at Wayve working on end-to-end self-driving systems.
+Some areas I&amp;rsquo;m currently investigating:
+Model Based RL like MCTS and adaptive planning Inverse and Offline RL Multiagent RL Novel View Point Synthesis and self-driving evaluation I&amp;rsquo;m also in technical leadership plus a bit of management.</description>
+    </item>
+    
+  </channel>
+</rss>

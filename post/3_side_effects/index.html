@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Side effects - Oleg Sinavski</title>
+  <meta name="description" content="Don&#39;t touch unrelated!">
+  <meta name="author" content="Oleg Sinavski"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Oleg Sinavski",
+    
+    "url": "https:\/\/sinavski.com"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/sinavski.com"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/sinavski.com",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/sinavski.com\/post\/3_side_effects\/",
+          "name": "Side effects"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Oleg Sinavski"
+  },
+  "headline": "Side effects",
+  "description" : "What is a side effect? What is a side effect? Let’s take a simple function that computes the absolute value of a number:\ndef abs_value_0(x): if x \u0026lt; 0: return -x return x and then use it in this fake console application:\nif __name__ == \u0026#39;__main__\u0026#39;: number = int(input(\u0026#34;enter a number:\u0026#34;)) print(\u0026#34;Thinking...\u0026#34;) time.sleep(10.) result = abs_value_0(number) print(\u0026#34;Absolute value is\u0026#34;, result) When a user runs that script, she is going to experience a simple text interface that just prints out the abs of an entered number.",
+  "inLanguage" : "en",
+  "wordCount":  1840 ,
+  "datePublished" : "2017-03-05T00:00:00",
+  "dateModified" : "2017-03-05T00:00:00",
+  "image" : "https:\/\/sinavski.com\/img\/invader2.png",
+  "keywords" : [ "python, software design" ],
+  "mainEntityOfPage" : "https:\/\/sinavski.com\/post\/3_side_effects\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/sinavski.com",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/sinavski.com\/img\/invader2.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Side effects" />
+<meta property="og:description" content="Don&#39;t touch unrelated!">
+<meta property="og:image" content="https://sinavski.com/side_effects_med.png" />
+<meta property="og:url" content="https://sinavski.com/post/3_side_effects/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Oleg Sinavski" />
+
+  <meta name="twitter:title" content="Side effects" />
+  <meta name="twitter:description" content="Don&#39;t touch unrelated!">
+  <meta name="twitter:image" content="https://sinavski.com/side_effects_med.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link href='https://sinavski.com/img/invader_favicon.png' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.105.0">
+  <link rel="alternate" href="https://sinavski.com/index.xml" type="application/rss+xml" title="Oleg Sinavski"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://sinavski.com/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /><link rel="stylesheet" href="https://sinavski.com/css/syntax.css" /><link rel="stylesheet" href="https://sinavski.com/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <style>
+.navbar-fixed-top{
+ 
+ 
+background-color:green;
+  height: 0px;
+  min-height: 0px;
+
+}
+</style>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+
+
+
+
+
+      <a class="navbar-brand" href="https://sinavski.com"></a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+
+            
+            
+          <a title="Oleg Sinavski" href="https://sinavski.com">
+            <img class="avatar-img" src="/images/invader2_huc3ef4e4d0b9608f8925b26a85c47f26b_192102_100x100_fit_q75_h2_box_3.webp" alt="Oleg Sinavski" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+  
+  
+
+
+
+
+
+
+
+<header class="header-section has-img">
+  <a title="Oleg Sinavski" href="https://sinavski.com">
+
+  
+  
+    
+    <img src=https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp style="display: none"/>
+
+    <div class="intro-header big-img" style="background-image: url('https://sinavski.com/images/invader_gan_small_huf6ea7d3eb8fdc9c926ae305936101e03_40566_150x150_fit_q75_h2_box_3.webp')">
+  
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>
+                
+                  Side effects
+                
+              </h1>
+                
+                  
+                    <h2 class="post-subheading">Don&#39;t touch unrelated!</h2>
+                  
+                
+                
+                  <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;9&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="img-desc" style="display: inline;"></span>
+    </div>
+
+  
+  <div class="intro-header no-img">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          <div class="post-heading">
+            
+              <h1>Side effects</h1>
+            
+            
+            
+              
+                <h2 class="post-subheading">Don&#39;t touch unrelated!</h2>
+              
+            
+            
+              <span class="post-meta">
+  
+  
+
+
+  
+   <i class="fas fa-clock"></i>&nbsp;9&nbsp;minutes
+  
+  
+  
+  
+</span>
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  </a>
+
+</header>
+
+
+    
+<div class="index_main_holder">
+
+  <div class="post-content container" role="main" style="background-color: white">
+      <div class="inline-menu">
+    <a href="/"><i class="fa fa-home"></i>Home</a> |
+    <a href="/page/about">About Me</a> |
+
+    <div class="dropdown mt-5">
+
+      <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+         Python <i class="fas fa-angle-down"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="/post/2_good_interface/">Good interfaces</a><a class="dropdown-item" href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a><a class="dropdown-item" href="/post/3_side_effects/">Side effects</a><a class="dropdown-item" href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></div>
+    </div>
+
+</div>
+
+          <div class="side-panel">
+
+    <hr class="small_left">
+    <a href="/"> <i class="fa fa-home"></i>Home</a>
+    <br>
+    <a href="/page/about">About Me</a>
+
+    <ul class="list-inline sidebar-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-1x">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+        </ul>
+
+    <hr class="small_left">
+    <h4>Python/Software:</h4>
+
+    <ul>
+        
+        <li>
+            <a href="/post/2_good_interface/">Good interfaces</a>
+        </li><li>
+            <a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a>
+        </li><li>
+            <a href="/post/3_side_effects/">Side effects</a>
+        </li><li>
+            <a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a>
+        </li></ul>
+
+
+</div>
+
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+        <article role="main" class="blog-post">
+
+
+
+
+
+          <h2 id="what-is-a-side-effect">What is a side effect?</h2>
+<p>What is a <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">side effect</a>?
+Let’s take a simple function that computes the absolute value of a number:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">abs_value_0</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">x</span>
+</span></span></code></pre></div><p>and then use it in this fake console application:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;enter a number:&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Thinking...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">result</span> <span class="o">=</span> <span class="n">abs_value_0</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Absolute value is&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span></span></code></pre></div><p>When a user runs that script, she is going to experience a simple text interface that just prints out the abs of an entered number.
+<code>x</code> is a function’s argument, and what comes out from the <code>return</code> statement is called the “primary effect”.
+The “primary effect” gets stored in the <code>result</code> variable and is printed next for the user.
+I added a short delay just to make the script sound smart.</p>
+<p>Now let’s take a look at another script:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">abs_value_1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">caller</span> <span class="o">=</span> <span class="n">PhoneCaller</span><span class="p">(</span><span class="n">generate_random_phone_number</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">   <span class="n">chat_bot</span> <span class="o">=</span> <span class="n">GPT3ChatBot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">person_phrase</span> <span class="o">=</span> <span class="n">caller</span><span class="o">.</span><span class="n">call</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">_</span> <span class="o">=</span> <span class="n">chat_bot</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">person_phrase</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">bot_phrase</span> <span class="o">=</span> <span class="n">chat_bot</span><span class="o">.</span><span class="n">generate_phrase</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The meaning of life is </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">caller</span><span class="o">.</span><span class="n">respond</span><span class="p">(</span><span class="n">bot_phrase</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">caller</span><span class="o">.</span><span class="n">hangup</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;enter a number:&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Thinking...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Absolute value is&#34;</span><span class="p">,</span> <span class="n">abs_value_1</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+</span></span></code></pre></div><p>When a user runs this script, she will have a similar experience.
+Here we also have a function argument <code>x</code> and a primary effect returned by the function.
+But now we have a section in the middle that performs actions that could be pretty surprising, to say the least.
+Every time you want to compute an absolute value of a number x, a GPT3-based chatbot calls a random person on the phone and explains the meaning of life to whoever picks up.
+It is an example of a “side-effect” - this function has other means to influence the external to itself world on top of returning the absolute value of <code>x</code>.</p>
+<p>You may ask: why do you have a weird unrelated piece of code in your function??
+Obviously, it&rsquo;s a contrived example, but people experienced with large codebases will immediately relate to it.
+It’s just a set of refactorings, misunderstandings, and people joining and leaving teams.
+After some time, you’re going to find something like that in very unexpected places.
+Here are more realistic examples of side-effect code:</p>
+<ul>
+<li>publishing a number to the Weights-and-Biases server out of the loss function</li>
+<li>hitting a logging server database on every call to an algorithm</li>
+<li>dumping debug images into /tmp from an OpenCV function call</li>
+<li>changing an environmental variable used in another function</li>
+<li>dropping to <code>pdb</code> on a condition</li>
+<li>changing a global variable</li>
+<li>calling <code>sys.exit</code> out of an algorithm</li>
+<li>sending a Slack message if <code>nan</code> is encountered during a backprop</li>
+<li>&hellip; and so on.</li>
+</ul>
+<p>To recognize side effects, I like to bucket them into two major (non-exhaustive) categories:</p>
+<ol>
+<li>External world: accessing and writing to an operating system shared resource (a filesystem, a network, I/O like printing and showing things on a screen, sending data to another process, etc.)</li>
+<li>Internal world: saving state in memory external to a function but internal to the whole application (a global variable, an environmental variable, direct memory write access to a memory that was not passed to you, mutating an input variable passed by reference, any form of caching, importing modules in python, etc.)</li>
+</ol>
+<p>Most importantly, calling a third-party function with side effects brings those side effects into your code!</p>
+<p>Side effects are unavoidable because any software must have at least some effect on the external world.
+Otherwise, what’s the point of running it?
+If your job was to write a script according to the simple spec:
+“A user enters a number; the script outputs an absolute value of that number,”
+then both scripts actually satisfy it.
+Your boss and product manager will have equal satisfaction levels from both deliverables (at least initially).
+If there is no visible difference, is there a reason to prefer one script over another? What are the generic downsides of side effects?
+Here are a few:</p>
+<h2 id="side-effect-failure-0---unexpected-crashes">Side effect failure 0 - unexpected crashes</h2>
+<p>How can <code>abs_value_0</code> crash? It pretty much can’t.
+Unless there is a Python interpreter or some OS problem, this function will always work as advertised.</p>
+<p>What about <code>abs_value_1</code>? There are six lines of the side-effect code, and it
+might crash in every single line for the following reasons:</p>
+<ul>
+<li>a phone caller might fail to initialize the phone line</li>
+<li>a GPT3 network will not find necessary GPU memory.</li>
+<li>a phone number might not exist, and a call would fail</li>
+<li>chatbot might fail to parse a phrase</li>
+<li>chatbot might fail to generate a phrase</li>
+<li>a person might drop the call so the caller can’t respond</li>
+<li>a caller might fail to hang up because the line got disconnected</li>
+<li>&hellip; and so on.</li>
+</ul>
+<p>In real-world code, every side effect line might crash because it typically deals with an external thing that you might not have control over:</p>
+<ul>
+<li>an external service might be unavailable</li>
+<li>you might run out of space in /tmp</li>
+<li>environmental variable is deleted before setting</li>
+<li>&hellip; and so on.</li>
+</ul>
+<p>So <strong>the code with side effects is more fragile</strong>.</p>
+<h2 id="side-effect-failure-1---unexpectedly-slow-and-occasionally-very-slow-code">Side effect failure 1 - unexpectedly slow (and occasionally very <em>slow</em>) code</h2>
+<p>Every side effect typically brings a computational cost.
+But most importantly, it brings computation time variability into your software.
+Because side-effect code typically deals with uncontrolled resources, you get uncontrolled slowdowns.
+Again, every side-effect code line int <code>abs_value_1</code> can bring you a massive slowdown:</p>
+<ul>
+<li>a phone line initialization is going to wait for the availability</li>
+<li>a GPT3 network is going to wait for GPU memory to be free</li>
+<li>a person is slow to pick up the phone</li>
+<li>computational load on the system might make it too slow to parse and generate phrases</li>
+<li>it might take a lot of time to send a message on a phone line and to hang up because the line is very busy.</li>
+</ul>
+<p>In real-world code, similar things can happen:</p>
+<ul>
+<li>database access could be very slow because the network is busy</li>
+<li>writing to a hard drive could be slow because of the fragmentation</li>
+<li>logging could be too slow because other loggers compete for the console or file</li>
+<li>&hellip; and so on.</li>
+</ul>
+<p>The bottom line is that <strong>the code with side effects is occasionally considerably slower</strong>.
+Just those two reasons: a higher chance of crashing and being slower for the user might already change the mind of your boss or a product manager from neutral to “we can’t release <code>abs_value_2</code>!”</p>
+<p>But there are more subtle and long-term pitfalls with side effects.</p>
+<h2 id="side-effect-failure-2---code-with-side-effects-is-hard-to-understand">Side effect failure 2 - code with side effects is hard to understand</h2>
+<p>What if I ask you to write a doc string for the function <code>abs_value_2</code>?
+You will definitely struggle to write a concise story about the purpose of that function.
+Similarly, if you just read the code with side effects for the first time, you will not understand what the heck this function is doing.
+A function with a single return statement achieves a single result, so you can concisely formulate it as “This function computes &lt;you_result&gt;.”
+If there are side effects, you have to add them all one by one:
+“This function computes &lt;you_result&gt;, AND it logs images to the hard drive, AND sends a Slack message on failure AND sends &lt;you_result&gt; to the main process.”</p>
+<p>In a large company, many people are joining and changing teams.
+As a result, side effects will be slowly added one by one; simple functions will grow.
+So in the large scheme of things, a company with less-readable code will waste days of cumulative developer and onboarding time reading and understanding obscure functions (even if they work flawlessly).
+Notice that a large doc string typically is not going to help because the bigger the doc, the higher the probability of being ignored completely.</p>
+<h2 id="side-effect-failure-3---code-with-side-effects-is-hard-to-debug">Side effect failure 3 - code with side effects is hard to debug</h2>
+<p>Because the code with side effects interacts with stuff that is not under your direct control, you will have many unpredictable and stochastic failures that are very hard to debug.
+For example, after considering all the reasons to crash the function <code>abs_value_2</code>, you might still find that it occasionally crashes after the release, and you just can’t reproduce a single crash.
+Maybe if your script runs on Windows Vista, GPT3 GPU kernels work differently, and the bot fails to parse Australian accents? You get the point.</p>
+<p>There is a crazy variability in the external world, so it is very hard to reproduce, debug and fix all edge cases.</p>
+<p>The situation could be even worse with “Internal world” side effects:
+while the external world is typically slow and fixed, the internal world changes from release to release and relies on minute changes in your program.
+For example, a caller might use a thread that gets into a deadlock with another thread in a seemingly unrelated part of your program.
+Some multithreading deadlocks caused by side effects might happen once per day and will be incredibly annoying and incredibly hard to catch.</p>
+<h2 id="side-effect-failure-4---code-with-side-effects-is-hard-to-test">Side effect failure 4 - code with side effects is hard to test</h2>
+<p>For all the same reasons, it is almost impossible to write exhaustive unit tests for the code with side effects.
+On top of the main result, you should better test that all side effects are as expected: did the person get a call? Did the caller actually hang up?</p>
+<p>Not to say of weird unit test interactions with side effects from one test failing other tests in the same test session.
+For example, one test can set a global variable that another test uses to evaluate a case and fail.</p>
+<p>Also, it is often impossible to actually perform external world interactions on a test server,
+so developers have to spend a lot of time mocking all external objects.</p>
+<h2 id="side-effect-failure-5---code-with-side-effects-is-hard-to-reuse">Side effect failure 5 - code with side effects is hard to reuse</h2>
+<p>What if your colleague wants to compute an absolute value of a number?
+There is no problem with <code>abs_value_0</code>. You just import the function and use it!
+What about <code>abs_value_1</code>? Just looking at the function name, you don’t know a priori if there are any side effects.
+Typically, people just import a function like that and start using it.
+However, after noticing those weird code lines and anticipating all the problems we mentioned,
+you might just leave such a function alone and write your own simpler implementations.</p>
+<p>However, often, they don’t even notice the side effects.
+The code can happily work in the codebase until some unfortunate day when all the crazy issues we mentioned start to come into play:
+the code begins to crash, occasionally being very slow.
+After finding the root cause under time pressure, people might be tempted to re-implement the function and just copy-paste the relevant pieces.</p>
+<p>At the end of the day, a codebase that relies on side effects would typically experience way <strong>less code reuse</strong>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Hopefully, you’re convinced that coding with side effects is a sister of premature optimization.
+It is the second source of all evil. Unfortunately, there is no way to avoid side effects,
+but we can minimize them, which is a topic of <a href="/post/4_dealing_with_side_effects/">another post</a>.</p>
+
+
+          
+            <div class="blog-tags">
+              
+                <a href="https://sinavski.com/tags/python/">python</a>&nbsp;
+              
+                <a href="https://sinavski.com/tags/software-design/">software design</a>&nbsp;
+              
+            </div>
+          
+
+          
+
+          
+            
+              
+            
+
+            
+                    <h4 class="see-also">See also</h4>
+                    <ul>
+                  
+                  
+                      <li><a href="/post/2_good_interface/">Good interfaces</a></li>
+                  
+                      <li><a href="/post/1_abc_vs_protocols/">Interfaces: abc vs Protocols</a></li>
+                  
+                      <li><a href="/post/4_dealing_with_side_effects/">Dealing with side effects</a></li>
+                  
+                </ul>
+
+            
+          
+        </article>
+
+        
+          <ul class="pager blog-pager">
+            
+              <li class="previous">
+                <a href="https://sinavski.com/post/4_dealing_with_side_effects/" data-toggle="tooltip" data-placement="top" title="Dealing with side effects">&larr; Previous Post</a>
+              </li>
+            
+            
+              <li class="next">
+                <a href="https://sinavski.com/post/1_abc_vs_protocols/" data-toggle="tooltip" data-placement="top" title="Interfaces: abc vs Protocols">Next Post &rarr;</a>
+              </li>
+            
+          </ul>
+        
+
+
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+		
+		  <a href="https://github.com/olegsinavski" title="GitHub">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+		
+		  <a href="https://linkedin.com/in/oleg-sinavski-b039b070" title="LinkedIn">
+		
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            <a href="/">Oleg Sinavski
+              &nbsp;&bull;&nbsp;&copy;
+                2021
+            </a>
+
+          
+          &nbsp;&bull;&nbsp;
+          Powered by <a href="https://gohugo.io">Hugo</a>/<a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://sinavski.com/js/main.js"></script><script> renderMathInElement(document.body); </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
