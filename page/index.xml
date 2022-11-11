@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Oleg Sinavski</title>
-    <link>https://sinavski.com/page/</link>
+    <link>https://olegsinavski.github.io/coding_blog_site/page/</link>
     <description>Recent content in Pages on Oleg Sinavski</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://sinavski.com/page/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://olegsinavski.github.io/coding_blog_site/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About me</title>
-      <link>https://sinavski.com/page/about/</link>
+      <link>https://olegsinavski.github.io/coding_blog_site/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://sinavski.com/page/about/</guid>
+      <guid>https://olegsinavski.github.io/coding_blog_site/page/about/</guid>
       <description>Hello, thats me:
 Some dream that robots are going to be helping us around.
 I&amp;rsquo;m an experienced researcher, developer and manager working in autonomous navigation trying to make it a reality.
